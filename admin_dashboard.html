@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - AirCoin</title>
+    <link rel="stylesheet" href="admin_dashboard.css">
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-database-compat.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Admin Header -->
+        <header class="admin-header">
+            <div class="header-left">
+                <h1>🛡️ AirCoin Admin</h1>
+                <div class="admin-info">
+                    <span id="adminEmail">Loading...</span>
+                    <div class="stats">
+                        <span class="stat-item">👥 <span id="totalUsers">0</span> Users</span>
+                        <span class="stat-item">📸 <span id="pendingRequests">0</span> Pending</span>
+                    </div>
+                </div>
+            </div>
+            <div class="header-right">
+                <button id="adminLogoutBtn" class="btn-logout">Logout</button>
+            </div>
+        </header>
+        
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Tabs Navigation -->
+            <div class="admin-tabs">
+                <button class="admin-tab active" data-tab="pending">⏳ Pending Requests</button>
+                <button class="admin-tab" data-tab="users">👥 All Users</button>
+                <button class="admin-tab" data-tab="approved">✅ Approved</button>
+                <button class="admin-tab" data-tab="rejected">❌ Rejected</button>
+            </div>
+            
+            <!-- Tab Contents -->
+            <div class="tab-content active" id="pendingTab">
+                <div class="section-header">
+                    <h2>Pending Verification Requests</h2>
+                    <div class="section-actions">
+                        <button id="refreshBtn" class="btn-refresh">🔄 Refresh</button>
+                    </div>
+                </div>
+                <div id="pendingRequestsList" class="requests-grid">
+                    <div class="loading">Loading pending requests...</div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="usersTab">
+                <div class="section-header">
+                    <h2>Registered Users</h2>
+                    <input type="text" id="userSearch" placeholder="🔍 Search users..." class="search-input">
+                </div>
+                <div id="usersList" class="users-grid">
+                    <div class="loading">Loading users...</div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="approvedTab">
+                <div class="section-header">
+                    <h2>Approved Requests</h2>
+                </div>
+                <div id="approvedRequestsList" class="requests-grid">
+                    <div class="loading">Loading approved requests...</div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="rejectedTab">
+                <div class="section-header">
+                    <h2>Rejected Requests</h2>
+                </div>
+                <div id="rejectedRequestsList" class="requests-grid">
+                    <div class="loading">Loading rejected requests...</div>
+                </div>
+            </div>
+        </main>
+        
+        <!-- Modal for Request Details -->
+        <div id="requestModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Request Details</h2>
+                    <button class="modal-close">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div id="modalContent">
+                        <!-- Dynamic content will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="admin_dashboard.js"></script>
+</body>
+</html>
